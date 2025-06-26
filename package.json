@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "start": "npm run build && node webstrates.js",
-    "build": "NODE_ENV='production' webpack --mode production",
+    "build": "SET NODE_ENV=production & webpack -p --config ./webpack.config.js",
     "watch": "webpack -w",
     "test": "mocha --bail tests/unit-tests tests/functional-tests",
     "test-all": "mocha tests/unit-tests tests/functional-tests"
