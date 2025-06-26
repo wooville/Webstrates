@@ -1,7 +1,7 @@
 {
 	"listeningAddress": "0.0.0.0",
 	"listeningPort": 7007,
-	"db": "mongodb://mongodb:27017/webstrate",
+	"db": "mongodb://127.0.0.1:27017/webstrate",
 	"niceWebstrateIds": true,
 	"maxAge": "1d",
 	"maxAssetSize": 100,
