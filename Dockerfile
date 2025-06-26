@@ -8,6 +8,7 @@ WORKDIR /app
 RUN npm install --production
 
 COPY . /app
+RUN npm link webpack-cli
 RUN yes | npm run build
 
 EXPOSE 7007
