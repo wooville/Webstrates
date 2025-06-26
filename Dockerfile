@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:alpine
 
 RUN apk add --update-cache git \
 	&& rm -rf /var/cache/apk/*
