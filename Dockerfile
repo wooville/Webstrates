@@ -5,10 +5,10 @@ RUN apk add --update-cache git \
 
 COPY /package*.json /app/
 WORKDIR /app
-RUN echo y | npm install --production
+RUN npm install --production
 
 COPY . /app
-RUN npm run build
+RUN yes | npm run build
 
 EXPOSE 7007
 
