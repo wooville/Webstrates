@@ -9,7 +9,8 @@ RUN npm install --production
 
 COPY . /app
 RUN npm link webpack-cli
-RUN yes | npm run build
+RUN npm run build
+RUN sudo apt install -y mongodb
 
 EXPOSE 7007
 
