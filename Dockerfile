@@ -5,7 +5,7 @@ RUN apk add --update-cache git \
 
 COPY /package*.json /app/
 WORKDIR /app
-RUN yes | npm install --production
+RUN npm install --production --yes
 
 COPY . /app
 RUN npm run build
