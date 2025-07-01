@@ -64,9 +64,8 @@ module.exports.extractQuery = function(req, res, next) {
 	const [webstrateId, versionOrTag, assetName, assetPath]
 		= Object.keys(req.params).map(i => req.params[i]);
 	const { version, tag } = extractVersionOrTag(versionOrTag);
-	assetName = tag;
 	Object.assign(req, { webstrateId, versionOrTag, assetName, assetPath, version, tag });
-	// console.log(versionOrTag + ", " + tag + ", " + assetName);
+	console.log(req.params, + ", " + req.query);
 	next();
 };
 
