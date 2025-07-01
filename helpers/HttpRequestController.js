@@ -65,7 +65,6 @@ module.exports.extractQuery = function(req, res, next) {
 		= Object.keys(req.params).map(i => req.params[i]);
 	const { version, tag } = extractVersionOrTag(versionOrTag);
 	Object.assign(req, { webstrateId, versionOrTag, assetName, assetPath, version, tag });
-	console.log(req.params);
 	next();
 };
 
@@ -179,7 +178,7 @@ module.exports.requestHandler = async function(req, res) {
 	}
 
 	try {
-		console.log("TEST " + req.tag);
+		console.log("TEST " + req.tag + ", " + req.assetName);
 		let snapshot = await documentManager.getDocument({
 			webstrateId: req.webstrateId,
 			version: req.version,
@@ -201,11 +200,9 @@ module.exports.requestHandler = async function(req, res) {
 
 		// Set CORS header on a response, assuming the requesting host is allowed it.
 		setCorsHeaders(req, res, snapshot);
-		console.log(req.params);
 
 		// Requesting an asset.
 		if (req.assetName) {
-			console.log(req.assetName);
 			try {
 				const asset = await assetManager.getAsset({
 					webstrateId: req.webstrateId,
