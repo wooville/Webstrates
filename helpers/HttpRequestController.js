@@ -184,7 +184,7 @@ module.exports.requestHandler = async function(req, res) {
 		let snapshot = await documentManager.getDocument({
 			webstrateId: req.webstrateId,
 			version: req.version,
-			tag: req.tag
+			// tag: req.tag
 		});
 		req.user.permissions = await permissionManager.getUserPermissionsFromSnapshot(req.user.username,
 			req.user.provider, snapshot);
