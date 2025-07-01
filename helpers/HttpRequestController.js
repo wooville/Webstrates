@@ -64,9 +64,9 @@ module.exports.extractQuery = function(req, res, next) {
 	const [webstrateId, versionOrTag, assetName, assetPath]
 		= Object.keys(req.params).map(i => req.params[i]);
 	const { version, tag } = extractVersionOrTag(versionOrTag);
-	// console.log("TEST1 " + versionOrTag);
+	console.log(req.params);
 	Object.assign(req, { webstrateId, versionOrTag, assetName, assetPath, version, tag });
-	console.log("TEST2 " + req.params);
+	console.log(req.params);
 	next();
 };
 
@@ -180,7 +180,7 @@ module.exports.requestHandler = async function(req, res) {
 	}
 
 	try {
-		console.log("TEST3 " + req.params);
+		console.log(req.params);
 		let snapshot = await documentManager.getDocument({
 			webstrateId: req.webstrateId,
 			version: req.version,
