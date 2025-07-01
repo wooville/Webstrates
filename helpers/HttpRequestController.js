@@ -64,9 +64,7 @@ module.exports.extractQuery = function(req, res, next) {
 	const [webstrateId, versionOrTag, assetName, assetPath]
 		= Object.keys(req.params).map(i => req.params[i]);
 	const { version, tag } = extractVersionOrTag(versionOrTag);
-	console.log(req.tag);
 	Object.assign(req, { webstrateId, versionOrTag, assetName, assetPath, version, tag });
-	console.log(req.tag);
 	next();
 };
 
@@ -180,7 +178,6 @@ module.exports.requestHandler = async function(req, res) {
 	}
 
 	try {
-		console.log(req.version);
 		let snapshot = await documentManager.getDocument({
 			webstrateId: req.webstrateId,
 			version: req.version,
@@ -203,19 +200,20 @@ module.exports.requestHandler = async function(req, res) {
 		// Set CORS header on a response, assuming the requesting host is allowed it.
 		setCorsHeaders(req, res, snapshot);
 
-		console.log(req.params);
+		// console.log(req.params);
 		// Requesting an asset.
-		if (req.assetName) {
-			console.log(req.assetName);
+		// if (req.assetName) {
+		if (req.tag) {
+			// console.log(req.tag);
 			try {
 				const asset = await assetManager.getAsset({
 					webstrateId: req.webstrateId,
-					assetName: req.assetName,
+					assetName: req.tag,
 					version: snapshot.v
 				});
 
 				if (!asset) {
-					return res.status(404).send(`Asset "${req.assetName}" not found.`);
+					return res.status(404).send(`Asset "${req.tag}" not found.`);
 				}
 
 				if ('dir' in req.query) {
@@ -228,7 +226,7 @@ module.exports.requestHandler = async function(req, res) {
 					return yauzl.open(APP_PATH + '/uploads/' + asset.fileName, { lazyEntries: true },
 						(err, zipFile) => {
 							if (err) {
-								return res.status(400).send(`"${req.assetName}" is not a valid ZIP file.`);
+								return res.status(400).send(`"${req.tag}" is not a valid ZIP file.`);
 							}
 							zipFile.on('entry', async entry => {
 								if (req.assetPath !== entry.fileName) {
