@@ -203,7 +203,7 @@ module.exports.requestHandler = async function(req, res) {
 		// console.log(req.params);
 		// Requesting an asset.
 		// if (req.assetName) {
-		if (req.params.assetName && req.tag) {
+		if (req.tag) {
 			// console.log(req.tag);
 			try {
 				const asset = await assetManager.getAsset({
