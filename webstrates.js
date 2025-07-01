@@ -261,7 +261,7 @@ app.post('/new', httpRequestController.extractQuery,
 // Matches /<webstrateId>/(<tagOrVersion>)?//<assetName>)?
 // Handles mostly all requests.
 app.get('/:webstrateId', httpRequestController.extractQuery, httpRequestController.requestHandler);
-app.get('/:webstrateId/:assetName', httpRequestController.extractQuery, httpRequestController.requestHandler);
+app.get('/:webstrateId/:tagOrVersion', httpRequestController.extractQuery, httpRequestController.requestHandler);
 
 // We can only post to /<webstrateId>/, because we won't allow users to add assets to old versions
 // of a document.
