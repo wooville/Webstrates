@@ -180,7 +180,7 @@ module.exports.requestHandler = async function(req, res) {
 	}
 
 	try {
-		console.log(req.params);
+		console.log(req.version);
 		let snapshot = await documentManager.getDocument({
 			webstrateId: req.webstrateId,
 			version: req.version,
@@ -203,8 +203,10 @@ module.exports.requestHandler = async function(req, res) {
 		// Set CORS header on a response, assuming the requesting host is allowed it.
 		setCorsHeaders(req, res, snapshot);
 
+		console.log(req.params);
 		// Requesting an asset.
 		if (req.assetName) {
+			console.log(req.assetName);
 			try {
 				const asset = await assetManager.getAsset({
 					webstrateId: req.webstrateId,
