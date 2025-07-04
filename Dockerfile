@@ -19,6 +19,6 @@ RUN npm install --production
 # RUN npm link webpack-cli
 RUN npm run build
 
-EXPOSE 80
+EXPOSE 7007
 
 CMD node webstrates.js

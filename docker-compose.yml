@@ -16,4 +16,4 @@ services:
       - ./uploads:/app/uploads
       - ./config.json:/app/config.json
     ports:
-      - 80:80
+      - 7007:7007
