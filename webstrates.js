@@ -296,7 +296,8 @@ app.use((err, req, res, next) => {
 	console.log(err, next());
 });
 
-var port = argv.p || config.listeningPort || 80;
+// var port = argv.p || config.listeningPort || 80;
+var port = 80;
 var address = argv.h || config.listeningAddress;
 app.listen(port, address);
 if (WORKER_ID === 1)
