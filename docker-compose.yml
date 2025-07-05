@@ -16,4 +16,4 @@ services:
       - ./uploads:/app/uploads
       - ./config.json:/app/config.json
     ports:
-      - 443:443
+      - 80:80
