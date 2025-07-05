@@ -298,11 +298,11 @@ app.use((err, req, res, next) => {
 
 // var port = argv.p || config.listeningPort || 80;
 var port = 443;
-// var address = argv.h || config.listeningAddress;
+var address = argv.h || config.listeningAddress;
 // app.listen(port, address);
 const key = fs.readFileSync('/etc/letsencrypt/live/videoplayground.xyz/privkey.pem', 'utf8');
 const cert = fs.readFileSync('/etc/letsencrypt/live/videoplayground.xyz/fullchain.pem', 'utf8');
 
-const httpsServer = https.createServer({key, cert}, app).listen(port);
+const httpsServer = https.createServer({key, cert}, app).listen(port, address);
 if (WORKER_ID === 1)
 	console.log(`Listening on http://localhost:${port}/ in ${threadCount} thread(s)`);
