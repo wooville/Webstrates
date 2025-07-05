@@ -8,6 +8,8 @@ const expressWs = require('express-ws');
 const httpAuth = require('http-auth');
 const passport = require('passport');
 const sessions = require('client-sessions');
+const https = require('https');
+const fs = require('fs');
 
 global.WORKER_ID = (cluster.worker && cluster.worker.id) || 1;
 global.APP_PATH = __dirname;
@@ -51,15 +53,6 @@ if (typeof config.threads !== 'undefined') {
 		}
 	}
 }
-
-const {key, cert} = await (async () => {
-	const certdir = (await fs.readdir("/etc/letsencrypt/live"))[0];
-
-	return {
-		key: await fs.readFile(`/etc/letsencrypt/live/${certdir}/privkey.pem`),
-		cert: await fs.readFile(`/etc/letsencrypt/live/${certdir}/fullchain.pem`)
-	}
-})();
 
 var app = express();
 expressWs(app);
@@ -289,8 +282,6 @@ app.post('/:webstrateId',
 	}
 );
 
-
-
 // Catch all for get.
 app.get("*any",function(req, res) {
 	res.send('Invalid request URL.');
@@ -306,9 +297,12 @@ app.use((err, req, res, next) => {
 });
 
 // var port = argv.p || config.listeningPort || 80;
-var port = 80;
-var address = argv.h || config.listeningAddress;
+var port = 443;
+// var address = argv.h || config.listeningAddress;
 // app.listen(port, address);
-const httpsServer = https.createServer({key, cert}, app).listen(port, address)
+const key = fs.readFileSync('/etc/letsencrypt/live/videoplayground.xyz/privkey.pem', 'utf8');
+const cert = fs.readFileSync('/etc/letsencrypt/live/videoplayground.xyz/fullchain.pem', 'utf8');
+
+const httpsServer = https.createServer({key, cert}, app).listen(port);
 if (WORKER_ID === 1)
 	console.log(`Listening on http://localhost:${port}/ in ${threadCount} thread(s)`);
