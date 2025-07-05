@@ -52,6 +52,15 @@ if (typeof config.threads !== 'undefined') {
 	}
 }
 
+const {key, cert} = await (async () => {
+	const certdir = (await fs.readdir("/etc/letsencrypt/live"))[0];
+
+	return {
+		key: await fs.readFile(`/etc/letsencrypt/live/${certdir}/privkey.pem`),
+		cert: await fs.readFile(`/etc/letsencrypt/live/${certdir}/fullchain.pem`)
+	}
+})();
+
 var app = express();
 expressWs(app);
 
@@ -299,6 +308,7 @@ app.use((err, req, res, next) => {
 // var port = argv.p || config.listeningPort || 80;
 var port = 80;
 var address = argv.h || config.listeningAddress;
-app.listen(port, address);
+// app.listen(port, address);
+const httpsServer = https.createServer({key, cert}, app).listen(port, address)
 if (WORKER_ID === 1)
 	console.log(`Listening on http://localhost:${port}/ in ${threadCount} thread(s)`);
