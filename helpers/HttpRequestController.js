@@ -87,7 +87,7 @@ function extractVersionOrTag(versionOrTag) {
 }
 
 /**
- * Extract host from a URL string, e.g. get `domain:700700` from `http://user:pass@domain:700700/path/`.
+ * Extract host from a URL string, e.g. get `domain:8000` from `http://user:pass@domain:8000/path/`.
  * @param  {string} urlString URL string.
  * @return {string}           Host string.
  * @private
