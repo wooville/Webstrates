@@ -14,7 +14,7 @@ coreEvents.createEvent('allModulesLoaded');
 
 const request = coreUtils.getLocationObject();
 
-const protocol = location.protocol === 'http:' ? 'ws:' : 'wss:';
+const protocol = location.protocol === 'http:' ? 'ws:' : 'ws:';
 coreWebsocket.setup(`${protocol}//${location.host}/${request.webstrateId}/${location.search}`);
 
 // Load optional modules.
