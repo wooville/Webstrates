@@ -5,7 +5,7 @@ module.exports = {
 
 	// Auth credentials
 	authType: 'au', // One of 'github', 'au', ...
-	server_address: 'http://localhost:80/',
+	server_address: 'http://localhost:443/',
 	username: '',
 	password: ''
 };

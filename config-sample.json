@@ -1,6 +1,6 @@
 {
 	"listeningAddress": "0.0.0.0",
-	"listeningPort": 80,
+	"listeningPort": 443,
 	"db": "mongodb://mongodb:27017/webstrate",
 	"niceWebstrateIds": true,
 	"maxAge": "1d",
